@@ -50,8 +50,8 @@ const PortfolioSection = () => {
     },
     {
       id: 5,
-      title: "Robot",
-      description: "Basic task automation and movement control robot built using Arduino and servo motors.",
+      title: "Line Following Robot",
+      description: "Autonomous robot built with Arduino and infrared sensors that can detect and follow a black line on a contrasting surface.",
       icon: <Cpu className="text-vibrant" size={24} />,
       category: "hardware",
       image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=1170&ixlib=rb-4.0.3"
