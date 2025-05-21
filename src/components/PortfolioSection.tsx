@@ -38,7 +38,7 @@ const PortfolioSection = () => {
       description: "Hardware project using LDRs and transistors to automatically control street lights based on ambient light.",
       icon: <Lightbulb className="text-neon" size={24} />,
       category: "hardware",
-      image: "https://images.unsplash.com/photo-1695842902331-546302a8195f?auto=format&fit=crop&q=80&w=1154&ixlib=rb-4.0.3"
+      image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1500&ixlib=rb-4.0.3"
     },
     {
       id: 4,
@@ -46,7 +46,7 @@ const PortfolioSection = () => {
       description: "Multisim simulation of a traffic light control system with timed sequences and pedestrian crossings.",
       icon: <Cpu className="text-vibrant" size={24} />,
       category: "simulation",
-      image: "https://images.unsplash.com/photo-1520453714393-9b80f0551cca?auto=format&fit=crop&q=80&w=1170&ixlib=rb-4.0.3"
+      image: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&q=80&w=1500&ixlib=rb-4.0.3"
     },
     {
       id: 5,
