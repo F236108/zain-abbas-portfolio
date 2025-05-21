@@ -117,6 +117,14 @@ export default {
 					'50%': {
 						boxShadow: '0 0 15px #00EAFF, 0 0 20px #00EAFF'
 					}
+				},
+				'spin-slow': {
+					'0%': {
+						transform: 'rotate(0deg)'
+					},
+					'100%': {
+						transform: 'rotate(360deg)'
+					}
 				}
 			},
 			animation: {
@@ -124,7 +132,8 @@ export default {
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				'fade-in': 'fade-in 0.5s ease-out forwards',
 				'slide-in-right': 'slide-in-right 0.5s ease-out forwards',
-				'glow': 'glow 2s ease-in-out infinite'
+				'glow': 'glow 2s ease-in-out infinite',
+				'spin-slow': 'spin-slow 10s linear infinite'
 			},
 			fontFamily: {
 				'sans': ['Inter', 'ui-sans-serif', 'system-ui'],
