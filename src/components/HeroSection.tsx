@@ -1,5 +1,5 @@
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { ArrowRight, Briefcase, Mail } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -9,6 +9,9 @@ const HeroSection = () => {
   const subtitleRef = useRef<HTMLParagraphElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
   const decorationRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  
+  const [scrollPosition, setScrollPosition] = useState(0);
 
   useEffect(() => {
     const profile = profileRef.current;
@@ -33,6 +36,14 @@ const HeroSection = () => {
         cta.classList.add('animate-fade-in');
       }, 600);
     }
+    
+    // Add parallax scroll effect
+    const handleScroll = () => {
+      setScrollPosition(window.scrollY);
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const scrollToContact = () => {
@@ -55,18 +66,40 @@ const HeroSection = () => {
     }
   };
 
+  // Calculate transform values for parallax effect
+  const decorationTransform = `translateY(${scrollPosition * 0.1}px)`;
+  const profileTransform = `translateY(${-scrollPosition * 0.05}px) rotate(${scrollPosition * 0.02}deg)`;
+  const contentTransform = `translateY(${scrollPosition * 0.03}px)`;
+
   return (
-    <section id="home" className="min-h-screen flex items-center pt-16 overflow-hidden relative">
-      {/* Background decorations */}
-      <div ref={decorationRef} className="absolute inset-0 opacity-0">
-        <div className="absolute top-20 left-10 w-64 h-64 rounded-full bg-electric/5 blur-3xl"></div>
-        <div className="absolute bottom-20 right-10 w-80 h-80 rounded-full bg-neon/5 blur-3xl"></div>
-        <div className="absolute top-1/3 right-1/4 w-40 h-40 rounded-full bg-vibrant/5 blur-3xl"></div>
+    <section 
+      ref={sectionRef} 
+      id="home" 
+      className="min-h-screen flex items-center pt-16 overflow-hidden relative"
+    >
+      {/* Enhanced Background decorations with parallax effect */}
+      <div 
+        ref={decorationRef} 
+        className="absolute inset-0 opacity-0"
+        style={{ transform: decorationTransform, transition: 'transform 0.1s ease-out' }}
+      >
+        <div className="absolute top-20 left-10 w-64 h-64 rounded-full bg-electric/5 blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-20 right-10 w-80 h-80 rounded-full bg-neon/5 blur-3xl animate-pulse"></div>
+        <div className="absolute top-1/3 right-1/4 w-40 h-40 rounded-full bg-vibrant/5 blur-3xl animate-pulse"></div>
+        
+        {/* Additional decorative elements */}
+        <div className="absolute bottom-1/4 left-1/4 w-32 h-32 rounded-full bg-electric/10 blur-xl animate-pulse"></div>
+        <div className="absolute top-1/2 left-2/3 w-24 h-24 rounded-full bg-neon/10 blur-xl animate-pulse"></div>
+        <div className="hidden md:block absolute top-16 left-1/3 h-[200px] w-[1px] bg-gradient-to-b from-transparent via-electric/30 to-transparent"></div>
+        <div className="hidden md:block absolute bottom-16 right-1/3 h-[150px] w-[1px] bg-gradient-to-b from-transparent via-neon/30 to-transparent"></div>
       </div>
       
       <div className="section-container relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-          <div className="order-2 lg:order-1">
+          <div 
+            className="order-2 lg:order-1"
+            style={{ transform: contentTransform, transition: 'transform 0.1s ease-out' }}
+          >
             <h1 
               ref={titleRef}
               className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 opacity-0"
@@ -107,9 +140,12 @@ const HeroSection = () => {
             </div>
           </div>
           
-          <div className="order-1 lg:order-2 flex justify-center">
+          <div 
+            className="order-1 lg:order-2 flex justify-center"
+            style={{ transform: profileTransform, transition: 'transform 0.1s ease-out' }}
+          >
             <div className="relative">
-              {/* Multiple glowing effects */}
+              {/* Enhanced glowing effects */}
               <div className="absolute -inset-0.5 bg-gradient-to-r from-electric via-neon to-vibrant rounded-full blur-xl opacity-20 animate-pulse"></div>
               <div className="absolute inset-0 bg-electric rounded-full blur-3xl opacity-10 animate-pulse"></div>
               
@@ -130,7 +166,7 @@ const HeroSection = () => {
                 />
               </div>
               
-              {/* Tech-themed decoration elements */}
+              {/* Enhanced tech-themed decoration elements */}
               <div className="absolute -bottom-4 -right-4 w-20 h-20 rounded-full bg-electric/20 backdrop-blur-sm 
                             border border-electric/30 flex items-center justify-center
                             animate-glow">

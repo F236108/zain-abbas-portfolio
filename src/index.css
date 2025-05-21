@@ -56,6 +56,30 @@
   body {
     @apply bg-background text-foreground font-sans;
   }
+  
+  /* Smooth scrolling for the whole page */
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Hide scrollbar but keep functionality */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: rgba(0, 234, 255, 0.3);
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 234, 255, 0.5);
+  }
 }
 
 @layer components {
@@ -107,5 +131,26 @@
   
   .section-container {
     @apply max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8;
+  }
+  
+  /* Scroll animation helper classes */
+  .scroll-animate {
+    @apply opacity-0 transition-all duration-700;
+  }
+  
+  .scroll-animate.from-bottom {
+    @apply translate-y-10;
+  }
+  
+  .scroll-animate.from-left {
+    @apply -translate-x-10;
+  }
+  
+  .scroll-animate.from-right {
+    @apply translate-x-10;
+  }
+  
+  .scroll-animate.fade-in {
+    @apply opacity-100 translate-x-0 translate-y-0;
   }
 }
