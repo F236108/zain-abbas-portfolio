@@ -1,7 +1,7 @@
 
 import React, { useEffect } from 'react';
 import Navbar from '../components/Navbar';
-import HeroSection from '../components/HeroSection';
+import HeroSection from '../components/hero'; // Updated import path
 import AboutSection from '../components/AboutSection';
 import PortfolioSection from '../components/PortfolioSection';
 import ServicesSection from '../components/ServicesSection';
