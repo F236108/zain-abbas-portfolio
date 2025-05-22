@@ -69,13 +69,13 @@ const ContactSection = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // EmailJS service integration
+    // EmailJS service integration with your credentials
     if (formRef.current) {
       emailjs.sendForm(
-        'YOUR_SERVICE_ID', // Replace with your EmailJS service ID
-        'YOUR_TEMPLATE_ID', // Replace with your EmailJS template ID
+        'service_j8l41wf', // Your EmailJS service ID
+        'template_bp7z2qf', // Your EmailJS template ID
         formRef.current,
-        'YOUR_PUBLIC_KEY' // Replace with your EmailJS public key
+        'WX1UPTBbx2X1pZC9h' // Your EmailJS public key
       )
         .then((result) => {
           console.log('Email sent successfully:', result.text);
