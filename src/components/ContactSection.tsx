@@ -1,8 +1,9 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Mail, Phone, Linkedin, Instagram, SendHorizontal, ExternalLink } from 'lucide-react';
 import { toast } from "sonner";
 import { motion } from "framer-motion";
+import emailjs from '@emailjs/browser';
 
 interface ContactInfo {
   icon: React.ReactNode;
@@ -20,6 +21,7 @@ const ContactSection = () => {
   
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [animateItems, setAnimateItems] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
     setAnimateItems(true);
@@ -67,18 +69,35 @@ const ContactSection = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
-    setTimeout(() => {
-      toast.success("Message sent successfully!", {
-        description: "Thank you for reaching out. I'll get back to you soon."
-      });
-      setFormData({
-        name: '',
-        email: '',
-        message: ''
-      });
-      setIsSubmitting(false);
-    }, 1500);
+    // EmailJS service integration
+    if (formRef.current) {
+      emailjs.sendForm(
+        'YOUR_SERVICE_ID', // Replace with your EmailJS service ID
+        'YOUR_TEMPLATE_ID', // Replace with your EmailJS template ID
+        formRef.current,
+        'YOUR_PUBLIC_KEY' // Replace with your EmailJS public key
+      )
+        .then((result) => {
+          console.log('Email sent successfully:', result.text);
+          toast.success("Message sent successfully!", {
+            description: "Thank you for reaching out. I'll get back to you soon."
+          });
+          setFormData({
+            name: '',
+            email: '',
+            message: ''
+          });
+        })
+        .catch((error) => {
+          console.error('Error sending email:', error.text);
+          toast.error("Failed to send message", {
+            description: "Please try again later or contact through another method."
+          });
+        })
+        .finally(() => {
+          setIsSubmitting(false);
+        });
+    }
   };
 
   // Animation variants
@@ -201,6 +220,7 @@ const ContactSection = () => {
             </motion.div>
 
             <motion.form 
+              ref={formRef}
               onSubmit={handleSubmit}
               variants={containerVariants}
             >
