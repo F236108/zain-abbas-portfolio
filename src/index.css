@@ -153,4 +153,22 @@
   .scroll-animate.fade-in {
     @apply opacity-100 translate-x-0 translate-y-0;
   }
+  
+  /* New modern UI enhancements */
+  .bg-size-200 {
+    background-size: 200% 100%;
+  }
+  
+  .bg-pos-0 {
+    background-position: 0% 0%;
+  }
+  
+  .bg-pos-100 {
+    background-position: 100% 0%;
+  }
+  
+  .glass-card {
+    @apply backdrop-blur-lg bg-white/5 border border-white/10;
+  }
 }
+
