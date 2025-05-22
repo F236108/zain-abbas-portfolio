@@ -57,9 +57,10 @@
     @apply bg-background text-foreground font-sans;
   }
   
-  /* Smooth scrolling for the whole page */
+  /* Enhanced smooth scrolling for the whole page */
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
   
   /* Hide scrollbar but keep functionality */
@@ -133,7 +134,7 @@
     @apply max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8;
   }
   
-  /* Scroll animation helper classes */
+  /* Enhanced Scroll animation helper classes */
   .scroll-animate {
     @apply opacity-0 transition-all duration-700;
   }
@@ -167,8 +168,78 @@
     background-position: 100% 0%;
   }
   
+  /* Enhanced glass effect for modern UI */
   .glass-card {
-    @apply backdrop-blur-lg bg-white/5 border border-white/10;
+    @apply backdrop-blur-lg bg-white/5 border border-white/10 relative;
+  }
+  
+  .glass-card::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-br from-electric/10 to-transparent opacity-30 rounded-lg;
+    z-index: -1;
+  }
+  
+  /* Enhanced animations classes */
+  .animated-border {
+    @apply relative;
+  }
+  
+  .animated-border::after {
+    content: '';
+    @apply absolute -inset-0.5 bg-gradient-to-r from-electric via-neon to-vibrant rounded-lg opacity-0 transition-all duration-300 -z-10;
+  }
+  
+  .animated-border:hover::after {
+    @apply opacity-30 blur-sm;
+  }
+  
+  /* Glow effect */
+  .glow-on-hover {
+    @apply relative overflow-hidden;
+  }
+  
+  .glow-on-hover::after {
+    content: '';
+    @apply absolute w-full h-full top-0 left-0 bg-gradient-to-r from-electric to-neon opacity-0 transition-opacity duration-300;
+  }
+  
+  .glow-on-hover:hover::after {
+    @apply opacity-20 blur-xl;
+  }
+  
+  /* Gradient hover effect */
+  .gradient-hover {
+    @apply relative bg-gradient-to-r from-electric/0 via-neon/0 to-vibrant/0 bg-size-200 bg-pos-0 transition-all duration-500;
+  }
+  
+  .gradient-hover:hover {
+    @apply bg-pos-100;
+  }
+  
+  /* Particles effect class */
+  .particles-bg {
+    @apply relative overflow-hidden;
+  }
+  
+  /* Float animation */
+  .float-animation {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
+  }
+  
+  /* Pulse glow animation */
+  .pulse-glow {
+    animation: pulse-glow 3s infinite;
+  }
+  
+  @keyframes pulse-glow {
+    0% { box-shadow: 0 0 0 0 rgba(0, 234, 255, 0.4); }
+    70% { box-shadow: 0 0 0 15px rgba(0, 234, 255, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(0, 234, 255, 0); }
   }
 }
-

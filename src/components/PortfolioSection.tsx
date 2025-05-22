@@ -1,6 +1,7 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, ExternalLink, Code, Lightbulb, Cpu } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 interface Project {
   id: number;
@@ -14,6 +15,8 @@ interface Project {
 
 const PortfolioSection = () => {
   const [filter, setFilter] = useState('all');
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
   
   const projects: Project[] = [
     {
@@ -66,68 +69,209 @@ const PortfolioSection = () => {
     }
   ];
   
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1,
+      }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+  
   const filteredProjects = filter === 'all' 
     ? projects 
     : projects.filter(project => project.category === filter);
 
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.3,
+      }
+    }
+  };
+
+  const titleVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { 
+        type: "spring", 
+        stiffness: 100,
+        damping: 10
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { 
+        type: "spring", 
+        stiffness: 70,
+        damping: 10
+      }
+    }
+  };
+
+  const filterVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.1,
+      }
+    }
+  };
+
+  const filterItemVariants = {
+    hidden: { opacity: 0, y: 10 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { 
+        type: "spring", 
+        stiffness: 100,
+        damping: 12
+      }
+    }
+  };
+
   return (
-    <section id="portfolio" className="py-20">
-      <div className="section-container">
-        <h2 className="section-title">My Portfolio</h2>
+    <section id="portfolio" className="py-20 overflow-hidden" ref={sectionRef}>
+      <motion.div 
+        className="section-container"
+        initial="hidden"
+        animate={isVisible ? "visible" : "hidden"}
+        variants={containerVariants}
+      >
+        <motion.h2 
+          className="section-title"
+          variants={titleVariants}
+        >
+          My Portfolio
+        </motion.h2>
         
-        <div className="flex flex-wrap gap-2 mt-8 mb-10 justify-center md:justify-start">
+        <motion.div 
+          className="flex flex-wrap gap-2 mt-8 mb-10 justify-center md:justify-start"
+          variants={filterVariants}
+        >
           {['all', 'software', 'hardware', 'simulation'].map((category) => (
-            <button
+            <motion.button
               key={category}
               onClick={() => setFilter(category)}
-              className={`px-4 py-2 rounded-full text-sm font-medium capitalize transition-colors ${
+              className={`px-4 py-2 rounded-full text-sm font-medium capitalize transition-all duration-300 ${
                 filter === category
                   ? 'bg-electric text-black'
                   : 'bg-secondary text-gray-300 hover:bg-opacity-70'
               }`}
+              variants={filterItemVariants}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
               {category === 'all' ? 'All Projects' : category}
-            </button>
+            </motion.button>
           ))}
-        </div>
+        </motion.div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredProjects.map((project) => (
-            <div key={project.id} className="bg-card rounded-lg overflow-hidden shadow-lg card-hover">
-              <div className="h-48 relative">
-                <img 
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          variants={containerVariants}
+        >
+          {filteredProjects.map((project, index) => (
+            <motion.div 
+              key={project.id} 
+              className="bg-card rounded-lg overflow-hidden shadow-lg card-hover glass-card"
+              variants={itemVariants}
+              initial="hidden"
+              animate={isVisible ? "visible" : "hidden"}
+              custom={index}
+              whileHover={{ 
+                y: -10, 
+                boxShadow: "0 20px 25px -5px rgba(0, 234, 255, 0.1), 0 10px 10px -5px rgba(0, 234, 255, 0.04)" 
+              }}
+              transition={{ 
+                type: "spring",
+                stiffness: 300,
+                damping: 15
+              }}
+            >
+              <div className="h-48 relative overflow-hidden">
+                <motion.img 
                   src={project.image} 
                   alt={project.title} 
                   className="w-full h-full object-cover"
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.5 }}
                 />
-                <div className="absolute top-0 right-0 bg-background/80 backdrop-blur-sm p-2 rounded-bl-lg">
+                <motion.div 
+                  className="absolute top-0 right-0 bg-background/80 backdrop-blur-sm p-2 rounded-bl-lg"
+                  initial={{ x: 20, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ delay: 0.2 * index, duration: 0.3 }}
+                >
                   {project.icon}
-                </div>
+                </motion.div>
               </div>
               
-              <div className="p-5">
+              <motion.div 
+                className="p-5"
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.3 * index, duration: 0.4 }}
+              >
                 <h3 className="text-xl font-bold mb-2">{project.title}</h3>
                 <p className="text-gray-400 text-sm mb-4">{project.description}</p>
                 
                 {project.link ? (
-                  <a 
+                  <motion.a 
                     href={project.link}
                     className="inline-flex items-center text-electric hover:text-electric/80 transition-colors gap-1"
                     target="_blank" 
                     rel="noopener noreferrer"
+                    whileHover={{ x: 3 }}
+                    whileTap={{ scale: 0.97 }}
                   >
                     View Project <ExternalLink size={16} />
-                  </a>
+                  </motion.a>
                 ) : (
-                  <span className="inline-flex items-center text-gray-500 gap-1">
+                  <motion.span 
+                    className="inline-flex items-center text-gray-500 gap-1"
+                    whileHover={{ x: 3 }}
+                  >
                     Project Details Coming Soon <Link size={16} />
-                  </span>
+                  </motion.span>
                 )}
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           ))}
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </section>
   );
 };
