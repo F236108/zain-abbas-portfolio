@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, ExternalLink, Code, Lightbulb, Cpu } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -99,65 +98,62 @@ const PortfolioSection = () => {
     ? projects 
     : projects.filter(project => project.category === filter);
 
-  // Animation variants
+  // Optimized animation variants for 60fps
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3,
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
       }
     }
   };
 
   const titleVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 20 },
     visible: { 
       opacity: 1, 
       y: 0,
       transition: { 
-        type: "spring", 
-        stiffness: 100,
-        damping: 10
+        duration: 0.5,
+        ease: "easeOut"
       }
     }
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 20 },
     visible: { 
       opacity: 1, 
       y: 0,
       transition: { 
-        type: "spring", 
-        stiffness: 70,
-        damping: 10
+        duration: 0.4,
+        ease: "easeOut"
       }
     }
   };
 
   const filterVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 10 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        staggerChildren: 0.1,
+        staggerChildren: 0.05,
         delayChildren: 0.1,
       }
     }
   };
 
   const filterItemVariants = {
-    hidden: { opacity: 0, y: 10 },
+    hidden: { opacity: 0, y: 5 },
     visible: { 
       opacity: 1, 
       y: 0,
       transition: { 
-        type: "spring", 
-        stiffness: 100,
-        damping: 12
+        duration: 0.3,
+        ease: "easeOut"
       }
     }
   };
@@ -185,14 +181,15 @@ const PortfolioSection = () => {
             <motion.button
               key={category}
               onClick={() => setFilter(category)}
-              className={`px-4 py-2 rounded-full text-sm font-medium capitalize transition-all duration-300 ${
+              className={`px-4 py-2 rounded-full text-sm font-medium capitalize transition-all duration-200 will-change-transform ${
                 filter === category
                   ? 'bg-electric text-black'
                   : 'bg-secondary text-gray-300 hover:bg-opacity-70'
               }`}
               variants={filterItemVariants}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              style={{ transform: 'translate3d(0, 0, 0)' }}
             >
               {category === 'all' ? 'All Projects' : category}
             </motion.button>
@@ -206,34 +203,31 @@ const PortfolioSection = () => {
           {filteredProjects.map((project, index) => (
             <motion.div 
               key={project.id} 
-              className="bg-card rounded-lg overflow-hidden shadow-lg card-hover glass-card"
+              className="bg-card rounded-lg overflow-hidden shadow-lg card-hover glass-card will-change-transform"
               variants={itemVariants}
               initial="hidden"
               animate={isVisible ? "visible" : "hidden"}
               custom={index}
               whileHover={{ 
-                y: -10, 
-                boxShadow: "0 20px 25px -5px rgba(0, 234, 255, 0.1), 0 10px 10px -5px rgba(0, 234, 255, 0.04)" 
+                y: -8, 
+                transition: { duration: 0.2, ease: "easeOut" }
               }}
-              transition={{ 
-                type: "spring",
-                stiffness: 300,
-                damping: 15
-              }}
+              style={{ transform: 'translate3d(0, 0, 0)' }}
             >
               <div className="h-48 relative overflow-hidden">
                 <motion.img 
                   src={project.image} 
                   alt={project.title} 
-                  className="w-full h-full object-cover"
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ duration: 0.5 }}
+                  className="w-full h-full object-cover will-change-transform"
+                  whileHover={{ scale: 1.03 }}
+                  transition={{ duration: 0.3 }}
+                  style={{ transform: 'translate3d(0, 0, 0)' }}
                 />
                 <motion.div 
                   className="absolute top-0 right-0 bg-background/80 backdrop-blur-sm p-2 rounded-bl-lg"
-                  initial={{ x: 20, opacity: 0 }}
+                  initial={{ x: 15, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
-                  transition={{ delay: 0.2 * index, duration: 0.3 }}
+                  transition={{ delay: 0.1 * index, duration: 0.3 }}
                 >
                   {project.icon}
                 </motion.div>
@@ -241,9 +235,9 @@ const PortfolioSection = () => {
               
               <motion.div 
                 className="p-5"
-                initial={{ y: 20, opacity: 0 }}
+                initial={{ y: 15, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.3 * index, duration: 0.4 }}
+                transition={{ delay: 0.2 * index, duration: 0.3 }}
               >
                 <h3 className="text-xl font-bold mb-2">{project.title}</h3>
                 <p className="text-gray-400 text-sm mb-4">{project.description}</p>
@@ -251,18 +245,19 @@ const PortfolioSection = () => {
                 {project.link ? (
                   <motion.a 
                     href={project.link}
-                    className="inline-flex items-center text-electric hover:text-electric/80 transition-colors gap-1"
+                    className="inline-flex items-center text-electric hover:text-electric/80 transition-colors gap-1 will-change-transform"
                     target="_blank" 
                     rel="noopener noreferrer"
-                    whileHover={{ x: 3 }}
-                    whileTap={{ scale: 0.97 }}
+                    whileHover={{ x: 2 }}
+                    whileTap={{ scale: 0.98 }}
+                    style={{ transform: 'translate3d(0, 0, 0)' }}
                   >
                     View Project <ExternalLink size={16} />
                   </motion.a>
                 ) : (
                   <motion.span 
                     className="inline-flex items-center text-gray-500 gap-1"
-                    whileHover={{ x: 3 }}
+                    whileHover={{ x: 2 }}
                   >
                     Project Details Coming Soon <Link size={16} />
                   </motion.span>

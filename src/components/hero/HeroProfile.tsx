@@ -11,26 +11,27 @@ const HeroProfile = ({ isInView }: HeroProfileProps) => {
   return (
     <motion.div 
       className="order-1 lg:order-2 flex justify-center"
-      initial={{ opacity: 0, y: 30 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
+      initial={{ opacity: 0, y: 20 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
     >
       <div className="relative">
-        {/* Simplified glowing effect */}
+        {/* Optimized glowing effect */}
         <motion.div 
-          className="absolute -inset-4 bg-gradient-to-r from-electric via-neon to-vibrant rounded-full blur-2xl opacity-20"
+          className="absolute -inset-4 bg-gradient-to-r from-electric via-neon to-vibrant rounded-full blur-2xl opacity-20 will-change-transform"
           animate={{
             opacity: [0.2, 0.25, 0.2]
           }}
           transition={{
-            duration: 3,
+            duration: 2,
             repeat: Infinity,
             repeatType: "reverse",
             ease: "easeInOut"
           }}
+          style={{ transform: 'translate3d(0, 0, 0)' }}
         ></motion.div>
         
-        {/* Profile frame with reduced animations */}
+        {/* Profile frame with optimized animations */}
         <motion.div className="relative z-10">
           <div className="absolute -inset-1 bg-gradient-to-br from-electric to-vibrant rounded-full opacity-70">
             <div className="absolute inset-0.5 bg-card rounded-full"></div>
@@ -40,22 +41,24 @@ const HeroProfile = ({ isInView }: HeroProfileProps) => {
             src="https://i.postimg.cc/j2dxy1vN/2.jpg" 
             alt="Zain Abbas" 
             className={cn(
-              "w-64 h-64 md:w-80 md:h-80 object-cover rounded-full z-10 relative",
+              "w-64 h-64 md:w-80 md:h-80 object-cover rounded-full z-10 relative will-change-transform",
               "border-4 border-background"
             )}
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            style={{ transform: 'translate3d(0, 0, 0)' }}
           />
         </motion.div>
         
-        {/* Simplified decoration elements */}
+        {/* Optimized decoration elements */}
         <motion.div 
           className="absolute -bottom-4 -right-4 w-20 h-20 rounded-full bg-electric/20 backdrop-blur-sm 
-                    border border-electric/30 flex items-center justify-center"
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 0.4, delay: 0.5 }}
+                    border border-electric/30 flex items-center justify-center will-change-transform"
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.3, delay: 0.3, ease: "easeOut" }}
+          style={{ transform: 'translate3d(0, 0, 0)' }}
         >
           <div className="w-3 h-3 bg-electric rounded-full opacity-80"></div>
           <div className="absolute w-full h-full rounded-full border-2 border-dashed border-electric/30"></div>
@@ -63,10 +66,11 @@ const HeroProfile = ({ isInView }: HeroProfileProps) => {
         
         <motion.div 
           className="absolute -top-6 -left-6 w-16 h-16 rounded-full bg-neon/10 backdrop-blur-sm 
-                    border border-neon/20 flex items-center justify-center z-20"
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 0.4, delay: 0.7 }}
+                    border border-neon/20 flex items-center justify-center z-20 will-change-transform"
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.3, delay: 0.4, ease: "easeOut" }}
+          style={{ transform: 'translate3d(0, 0, 0)' }}
         >
           <div className="w-2 h-2 bg-neon rounded-full"></div>
         </motion.div>

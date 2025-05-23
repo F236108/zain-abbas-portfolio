@@ -81,6 +81,22 @@
   ::-webkit-scrollbar-thumb:hover {
     background: rgba(0, 234, 255, 0.5);
   }
+
+  /* Global performance optimizations */
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* GPU acceleration for common animations */
+  .will-change-transform {
+    will-change: transform;
+    transform: translate3d(0, 0, 0);
+  }
+
+  .will-change-auto {
+    will-change: auto;
+  }
 }
 
 @layer components {
@@ -98,11 +114,11 @@
   }
   
   .card-hover {
-    @apply transition-all duration-300 hover:shadow-[0_0_15px_rgba(0,234,255,0.3)] hover:translate-y-[-5px];
+    @apply transition-all duration-200 hover:shadow-[0_0_15px_rgba(0,234,255,0.3)] hover:translate-y-[-5px] will-change-transform;
   }
   
   .nav-link {
-    @apply relative px-4 py-2 text-foreground hover:text-electric transition-colors duration-300;
+    @apply relative px-4 py-2 text-foreground hover:text-electric transition-colors duration-200;
   }
   
   .nav-link.active {
@@ -119,15 +135,15 @@
   }
   
   .btn-primary {
-    @apply bg-electric text-black font-medium px-6 py-2 rounded transition-all duration-300 
+    @apply bg-electric text-black font-medium px-6 py-2 rounded transition-all duration-200 
     hover:bg-opacity-80 focus:outline-none focus:ring-2 focus:ring-electric focus:ring-opacity-50
-    active:scale-95;
+    active:scale-95 will-change-transform;
   }
   
   .btn-secondary {
     @apply border border-electric text-electric font-medium px-6 py-2 rounded transition-colors 
-    duration-300 hover:bg-electric hover:text-black focus:outline-none focus:ring-2 
-    focus:ring-electric focus:ring-opacity-50 active:scale-95;
+    duration-200 hover:bg-electric hover:text-black focus:outline-none focus:ring-2 
+    focus:ring-electric focus:ring-opacity-50 active:scale-95 will-change-transform;
   }
   
   .section-container {
@@ -136,7 +152,7 @@
   
   /* Enhanced Scroll animation helper classes */
   .scroll-animate {
-    @apply opacity-0 transition-all duration-700;
+    @apply opacity-0 transition-all duration-500 will-change-transform;
   }
   
   .scroll-animate.from-bottom {
@@ -186,7 +202,7 @@
   
   .animated-border::after {
     content: '';
-    @apply absolute -inset-0.5 bg-gradient-to-r from-electric via-neon to-vibrant rounded-lg opacity-0 transition-all duration-300 -z-10;
+    @apply absolute -inset-0.5 bg-gradient-to-r from-electric via-neon to-vibrant rounded-lg opacity-0 transition-all duration-200 -z-10;
   }
   
   .animated-border:hover::after {
@@ -200,7 +216,7 @@
   
   .glow-on-hover::after {
     content: '';
-    @apply absolute w-full h-full top-0 left-0 bg-gradient-to-r from-electric to-neon opacity-0 transition-opacity duration-300;
+    @apply absolute w-full h-full top-0 left-0 bg-gradient-to-r from-electric to-neon opacity-0 transition-opacity duration-200;
   }
   
   .glow-on-hover:hover::after {
@@ -209,7 +225,7 @@
   
   /* Gradient hover effect */
   .gradient-hover {
-    @apply relative bg-gradient-to-r from-electric/0 via-neon/0 to-vibrant/0 bg-size-200 bg-pos-0 transition-all duration-500;
+    @apply relative bg-gradient-to-r from-electric/0 via-neon/0 to-vibrant/0 bg-size-200 bg-pos-0 transition-all duration-300;
   }
   
   .gradient-hover:hover {
@@ -221,25 +237,36 @@
     @apply relative overflow-hidden;
   }
   
-  /* Float animation */
+  /* Float animation - optimized for 60fps */
   .float-animation {
-    animation: float 6s ease-in-out infinite;
+    animation: float 4s ease-in-out infinite;
+    will-change: transform;
   }
   
   @keyframes float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-20px); }
-    100% { transform: translateY(0px); }
+    0% { transform: translate3d(0, 0px, 0); }
+    50% { transform: translate3d(0, -15px, 0); }
+    100% { transform: translate3d(0, 0px, 0); }
   }
   
-  /* Pulse glow animation */
+  /* Pulse glow animation - optimized */
   .pulse-glow {
-    animation: pulse-glow 3s infinite;
+    animation: pulse-glow 2s infinite;
+    will-change: box-shadow;
   }
   
   @keyframes pulse-glow {
     0% { box-shadow: 0 0 0 0 rgba(0, 234, 255, 0.4); }
-    70% { box-shadow: 0 0 0 15px rgba(0, 234, 255, 0); }
+    70% { box-shadow: 0 0 0 10px rgba(0, 234, 255, 0); }
     100% { box-shadow: 0 0 0 0 rgba(0, 234, 255, 0); }
+  }
+
+  /* Optimized hover transitions */
+  .smooth-hover {
+    @apply transition-all duration-200 ease-out will-change-transform;
+  }
+
+  .smooth-hover:hover {
+    @apply transform translate-y-[-2px] shadow-lg;
   }
 }

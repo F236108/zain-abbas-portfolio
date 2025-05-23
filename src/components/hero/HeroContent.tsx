@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Briefcase, Mail } from 'lucide-react';
-import { motion, useInView } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 interface HeroContentProps {
   isInView: boolean;
@@ -10,16 +10,16 @@ interface HeroContentProps {
 }
 
 const HeroContent = ({ isInView, scrollToContact, scrollToPortfolio }: HeroContentProps) => {
-  // Animation variants
+  // Optimized animation variants for 60fps
   const fadeInUpVariants = {
-    hidden: { opacity: 0, y: 50 },
+    hidden: { opacity: 0, y: 30 },
     visible: (i: number) => ({
       opacity: 1,
       y: 0,
       transition: {
-        delay: i * 0.2,
-        duration: 0.8,
-        ease: [0.25, 0.1, 0.25, 1]
+        delay: i * 0.1,
+        duration: 0.5,
+        ease: "easeOut"
       }
     })
   };
@@ -39,7 +39,7 @@ const HeroContent = ({ isInView, scrollToContact, scrollToPortfolio }: HeroConte
       >
         <motion.span 
           className="block"
-          custom={2}
+          custom={1}
           variants={fadeInUpVariants}
         >
           Hi, I'm
@@ -48,18 +48,19 @@ const HeroContent = ({ isInView, scrollToContact, scrollToPortfolio }: HeroConte
           className="overflow-hidden"
           initial={{ height: 0 }}
           animate={{ height: "auto" }}
-          transition={{ duration: 1.2, delay: 0.5 }}
+          transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
         >
           <motion.span 
-            className="gradient-text text-5xl sm:text-6xl md:text-7xl block"
+            className="gradient-text text-5xl sm:text-6xl md:text-7xl block will-change-transform"
             initial={{ y: 100 }}
             animate={{ y: 0 }}
             transition={{ 
               type: "spring",
-              damping: 12,
-              stiffness: 100,
-              delay: 0.5
+              damping: 15,
+              stiffness: 120,
+              delay: 0.3
             }}
+            style={{ transform: 'translate3d(0, 0, 0)' }}
           >
             Zain Abbas
           </motion.span>
@@ -67,7 +68,7 @@ const HeroContent = ({ isInView, scrollToContact, scrollToPortfolio }: HeroConte
       </motion.h1>
       
       <motion.p 
-        custom={4}
+        custom={2}
         variants={fadeInUpVariants}
         className="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed"
       >
@@ -76,48 +77,53 @@ const HeroContent = ({ isInView, scrollToContact, scrollToPortfolio }: HeroConte
       </motion.p>
       
       <motion.div 
-        custom={5}
+        custom={3}
         variants={fadeInUpVariants}
         className="flex flex-wrap gap-4"
       >
         <motion.button 
           onClick={scrollToContact} 
-          className="btn-primary flex items-center gap-2 group relative overflow-hidden"
+          className="btn-primary flex items-center gap-2 group relative overflow-hidden will-change-transform"
           whileHover={{ 
-            scale: 1.03,
-            boxShadow: "0 0 15px rgba(0, 234, 255, 0.5)"
+            scale: 1.02,
+            transition: { duration: 0.2 }
           }}
-          whileTap={{ scale: 0.97 }}
+          whileTap={{ scale: 0.98 }}
+          style={{ transform: 'translate3d(0, 0, 0)' }}
         >
           <motion.span className="absolute inset-0 bg-gradient-to-r from-electric to-neon opacity-30" 
             initial={{ x: "-100%" }}
             whileHover={{ x: "100%" }}
-            transition={{ duration: 1 }}
+            transition={{ duration: 0.6 }}
           />
           Contact Me 
-          <Mail size={18} className="group-hover:translate-x-1 transition-transform" />
+          <Mail size={18} className="group-hover:translate-x-1 transition-transform duration-200" />
         </motion.button>
         
         <motion.button 
           onClick={scrollToPortfolio} 
-          className="btn-secondary flex items-center gap-2 group animated-border"
-          whileHover={{ scale: 1.03 }}
-          whileTap={{ scale: 0.97 }}
+          className="btn-secondary flex items-center gap-2 group animated-border will-change-transform"
+          whileHover={{ 
+            scale: 1.02,
+            transition: { duration: 0.2 }
+          }}
+          whileTap={{ scale: 0.98 }}
+          style={{ transform: 'translate3d(0, 0, 0)' }}
         >
           View My Work
-          <Briefcase size={18} className="group-hover:translate-x-1 transition-transform" />
+          <Briefcase size={18} className="group-hover:translate-x-1 transition-transform duration-200" />
         </motion.button>
       </motion.div>
       
       <motion.div 
-        custom={6}
+        custom={4}
         variants={fadeInUpVariants}
         className="mt-12 hidden md:flex gap-3 items-center"
       >
         <motion.div
           initial={{ width: 0 }}
           animate={{ width: "3rem" }}
-          transition={{ delay: 1.2, duration: 0.8 }} 
+          transition={{ delay: 0.8, duration: 0.6, ease: "easeOut" }} 
           className="h-[1px] bg-electric/50"
         ></motion.div>
         <p className="text-sm text-gray-400 italic">Crafting electrical solutions for tomorrow's challenges</p>
