@@ -2,6 +2,7 @@
 import React from 'react';
 import { Briefcase, Mail, Download } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { toast } from 'sonner';
 
 interface HeroContentProps {
   isInView: boolean;
@@ -25,13 +26,29 @@ const HeroContent = ({ isInView, scrollToContact, scrollToPortfolio }: HeroConte
   };
 
   const handleDownloadCV = () => {
-    // Create a download link for CV
-    const link = document.createElement('a');
-    link.href = '/cv-zain-abbas.pdf'; // You'll need to add this file to public folder
-    link.download = 'Zain_Abbas_CV.pdf';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    // Check if we have a CV in localStorage
+    const cvData = localStorage.getItem('cv-pdf-data');
+    const cvName = localStorage.getItem('cv-pdf-name') || 'Zain_Abbas_CV.pdf';
+    
+    if (cvData) {
+      // Use the uploaded CV if available
+      const link = document.createElement('a');
+      link.href = cvData;
+      link.download = cvName;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      toast.success('CV downloaded successfully');
+    } else {
+      // Fallback to the static file if no CV is uploaded
+      const link = document.createElement('a');
+      link.href = '/cv-zain-abbas.pdf'; // Fallback to static file
+      link.download = 'Zain_Abbas_CV.pdf';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      toast.success('CV downloaded successfully');
+    }
   };
 
   return (
