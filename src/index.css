@@ -209,7 +209,8 @@
   
   .glass-card::before {
     content: '';
-    @apply absolute inset-0 bg-gradient-to-br from-electric/8 to-transparent opacity-30 rounded-lg;
+    @apply absolute inset-0 opacity-30 rounded-lg;
+    background: linear-gradient(to bottom right, rgba(0, 234, 255, 0.08), transparent);
     z-index: -1;
   }
   
@@ -243,11 +244,18 @@
   
   /* Optimized gradient hover */
   .gradient-hover {
-    @apply relative bg-gradient-to-r from-electric/0 via-neon/0 to-vibrant/0 bg-size-200 bg-pos-0 transition-all duration-200 ease-out will-change-transform;
+    @apply relative transition-all duration-200 ease-out will-change-transform;
+    background: linear-gradient(to right, 
+      rgba(0, 234, 255, 0), 
+      rgba(57, 255, 20, 0), 
+      rgba(255, 95, 31, 0)
+    );
+    background-size: 200% 100%;
+    background-position: 0% 0%;
   }
   
   .gradient-hover:hover {
-    @apply bg-pos-100;
+    background-position: 100% 0%;
   }
   
   /* Scale utilities for 60fps */
