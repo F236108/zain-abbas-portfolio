@@ -2,6 +2,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import CVUploader from '../components/admin/CVUploader';
+import PasswordManager from '../components/admin/PasswordManager';
 
 const Admin = () => {
   const navigate = useNavigate();
@@ -12,8 +13,10 @@ const Admin = () => {
   
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    // Simple password check - in a real app, use proper authentication
-    if (password === 'admin123') { // You should change this password
+    // Get stored password or use default
+    const storedPassword = localStorage.getItem('admin-password') || 'admin123';
+    
+    if (password === storedPassword) {
       setIsAuthenticated(true);
       localStorage.setItem('admin-auth', 'true');
     } else {
@@ -78,10 +81,14 @@ const Admin = () => {
                 Login
               </button>
             </form>
+            <p className="text-sm text-muted-foreground mt-4">
+              Default password: admin123
+            </p>
           </div>
         ) : (
           <div className="grid gap-6">
             <CVUploader />
+            <PasswordManager />
           </div>
         )}
       </div>

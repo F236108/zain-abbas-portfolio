@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import HeroSection from '../components/hero'; // Updated import path
@@ -7,6 +6,7 @@ import PortfolioSection from '../components/PortfolioSection';
 import ServicesSection from '../components/ServicesSection';
 import ContactSection from '../components/ContactSection';
 import Footer from '../components/Footer';
+import AdminAccessButton from '../components/AdminAccessButton';
 
 const Index = () => {
   useEffect(() => {
@@ -23,6 +23,7 @@ const Index = () => {
       <ServicesSection />
       <ContactSection />
       <Footer />
+      <AdminAccessButton />
     </div>
   );
 };
