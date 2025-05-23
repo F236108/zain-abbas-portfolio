@@ -14,8 +14,8 @@ interface ContactInfo {
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
+    from_name: '',
+    from_email: '',
     message: ''
   });
   
@@ -83,8 +83,8 @@ const ContactSection = () => {
             description: "Thank you for reaching out. I'll get back to you soon."
           });
           setFormData({
-            name: '',
-            email: '',
+            from_name: '',
+            from_email: '',
             message: ''
           });
         })
@@ -228,14 +228,14 @@ const ContactSection = () => {
                 className="mb-4" 
                 variants={itemVariants}
               >
-                <label htmlFor="name" className="block text-sm font-medium text-gray-400 mb-1">
+                <label htmlFor="from_name" className="block text-sm font-medium text-gray-400 mb-1">
                   Your Name
                 </label>
                 <input
                   type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
+                  id="from_name"
+                  name="from_name"
+                  value={formData.from_name}
                   onChange={handleChange}
                   required
                   className="w-full px-4 py-2 bg-muted border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-electric 
@@ -248,14 +248,14 @@ const ContactSection = () => {
                 className="mb-4"
                 variants={itemVariants}
               >
-                <label htmlFor="email" className="block text-sm font-medium text-gray-400 mb-1">
+                <label htmlFor="from_email" className="block text-sm font-medium text-gray-400 mb-1">
                   Your Email
                 </label>
                 <input
                   type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
+                  id="from_email"
+                  name="from_email"
+                  value={formData.from_email}
                   onChange={handleChange}
                   required
                   className="w-full px-4 py-2 bg-muted border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-electric
