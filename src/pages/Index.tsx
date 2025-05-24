@@ -1,3 +1,4 @@
+
 import React, { useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import HeroSection from '../components/hero'; // Updated import path
@@ -7,6 +8,7 @@ import ServicesSection from '../components/ServicesSection';
 import ContactSection from '../components/ContactSection';
 import Footer from '../components/Footer';
 import AdminAccessButton from '../components/AdminAccessButton';
+import ThemeToggle from '../components/ThemeToggle';
 
 const Index = () => {
   useEffect(() => {
@@ -24,6 +26,7 @@ const Index = () => {
       <ContactSection />
       <Footer />
       <AdminAccessButton />
+      <ThemeToggle />
     </div>
   );
 };
