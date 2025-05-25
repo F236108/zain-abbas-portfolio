@@ -25,7 +25,12 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
     return stored || 'system';
   });
 
-  const [actualTheme, setActualTheme] = useState<'light' | 'dark'>('dark');
+  const [actualTheme, setActualTheme] = useState<'light' | 'dark'>(() => {
+    if (typeof window !== 'undefined') {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    return 'light';
+  });
 
   useEffect(() => {
     const root = window.document.documentElement;
