@@ -157,48 +157,48 @@
   
   .section-title::after {
     content: "";
-    @apply absolute -bottom-2 left-0 w-1/2 h-1 bg-electric block;
+    @apply absolute -bottom-2 left-0 w-1/2 h-1 bg-primary block;
     animation: fadeInScale 0.6s ease-out forwards;
   }
   
   .gradient-text {
-    @apply bg-gradient-to-r from-electric via-neon to-vibrant text-transparent bg-clip-text will-change-transform;
+    @apply bg-gradient-to-r from-primary via-accent to-primary text-transparent bg-clip-text will-change-transform;
   }
   
   .card-hover {
-    @apply transition-all duration-200 ease-out hover:shadow-[0_0_15px_rgba(0,234,255,0.2)] hover:translate-y-[-3px] will-change-transform;
+    @apply transition-all duration-200 ease-out hover:shadow-[0_0_15px_rgba(37,99,235,0.2)] hover:translate-y-[-3px] will-change-transform;
     transform: translate3d(0, 0, 0);
   }
   
   .nav-link {
-    @apply relative px-4 py-2 text-foreground hover:text-electric transition-colors duration-150 ease-out will-change-transform;
+    @apply relative px-4 py-2 text-foreground hover:text-primary transition-colors duration-150 ease-out will-change-transform;
   }
   
   .nav-link.active {
-    @apply text-electric;
+    @apply text-primary;
   }
   
   .nav-link.active::after {
     content: "";
-    @apply absolute bottom-0 left-0 w-full h-0.5 bg-electric block;
+    @apply absolute bottom-0 left-0 w-full h-0.5 bg-primary block;
     animation: slideInScale 0.3s ease-out forwards;
   }
   
   .highlight {
-    @apply text-electric;
+    @apply text-primary;
   }
   
   .btn-primary {
-    @apply bg-electric text-black font-medium px-6 py-2 rounded transition-all duration-150 ease-out
-    hover:bg-opacity-90 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-electric focus:ring-opacity-50
+    @apply bg-primary text-primary-foreground font-medium px-6 py-2 rounded transition-all duration-150 ease-out
+    hover:bg-opacity-90 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50
     active:scale-98 will-change-transform;
     transform: translate3d(0, 0, 0);
   }
   
   .btn-secondary {
-    @apply border border-electric text-electric font-medium px-6 py-2 rounded transition-all 
-    duration-150 ease-out hover:bg-electric hover:text-black focus:outline-none focus:ring-2 
-    focus:ring-electric focus:ring-opacity-50 active:scale-98 will-change-transform;
+    @apply border border-primary text-primary font-medium px-6 py-2 rounded transition-all 
+    duration-150 ease-out hover:bg-primary hover:text-primary-foreground focus:outline-none focus:ring-2 
+    focus:ring-primary focus:ring-opacity-50 active:scale-98 will-change-transform;
     transform: translate3d(0, 0, 0);
   }
   
@@ -250,7 +250,7 @@
   .glass-card::before {
     content: '';
     @apply absolute inset-0 opacity-30 rounded-lg;
-    background: linear-gradient(to bottom right, rgba(0, 234, 255, 0.08), transparent);
+    background: linear-gradient(to bottom right, rgba(37, 99, 235, 0.08), transparent);
     z-index: -1;
   }
   
@@ -261,7 +261,7 @@
   
   .animated-border::after {
     content: '';
-    @apply absolute -inset-0.5 bg-gradient-to-r from-electric via-neon to-vibrant rounded-lg opacity-0 transition-all duration-150 ease-out -z-10;
+    @apply absolute -inset-0.5 bg-gradient-to-r from-primary via-accent to-primary rounded-lg opacity-0 transition-all duration-150 ease-out -z-10;
   }
   
   .animated-border:hover::after {
@@ -275,7 +275,7 @@
   
   .glow-on-hover::after {
     content: '';
-    @apply absolute w-full h-full top-0 left-0 bg-gradient-to-r from-electric to-neon opacity-0 transition-opacity duration-150 ease-out;
+    @apply absolute w-full h-full top-0 left-0 bg-gradient-to-r from-primary to-accent opacity-0 transition-opacity duration-150 ease-out;
   }
   
   .glow-on-hover:hover::after {
@@ -286,9 +286,9 @@
   .gradient-hover {
     @apply relative transition-all duration-200 ease-out will-change-transform;
     background: linear-gradient(to right, 
-      rgba(0, 234, 255, 0), 
-      rgba(57, 255, 20, 0), 
-      rgba(255, 95, 31, 0)
+      rgba(37, 99, 235, 0), 
+      rgba(59, 130, 246, 0), 
+      rgba(37, 99, 235, 0)
     );
     background-size: 200% 100%;
     background-position: 0% 0%;
@@ -352,10 +352,10 @@
 
 @keyframes pulse-glow {
   0%, 100% { 
-    box-shadow: 0 0 0 0 rgba(0, 234, 255, 0.3); 
+    box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.3); 
   }
   50% { 
-    box-shadow: 0 0 0 8px rgba(0, 234, 255, 0); 
+    box-shadow: 0 0 0 8px rgba(37, 99, 235, 0); 
   }
 }
 
