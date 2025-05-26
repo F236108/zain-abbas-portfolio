@@ -13,22 +13,22 @@ const ServicesSection = () => {
     {
       title: "Technical Tutoring",
       description: "One-on-one and group tutoring in electrical engineering topics and C++ programming with customized lesson plans and exercises.",
-      icon: <BookOpen size={40} className="text-electric" />
+      icon: <BookOpen size={40} className="text-primary" />
     },
     {
       title: "Project Development Assistance",
       description: "Support in developing engineering projects involving circuit design and programming, from concept to implementation.",
-      icon: <Code size={40} className="text-neon" />
+      icon: <Code size={40} className="text-accent" />
     },
     {
       title: "Teacher Assistance",
       description: "Preparing materials, grading assignments, and engaging with students to enhance their learning experience.",
-      icon: <Briefcase size={40} className="text-vibrant" />
+      icon: <Briefcase size={40} className="text-primary" />
     },
     {
       title: "Basic Technical Consulting",
       description: "Troubleshooting and optimizing academic projects with practical solutions and performance improvements.",
-      icon: <Wrench size={40} className="text-electric" />
+      icon: <Wrench size={40} className="text-accent" />
     }
   ];
 
@@ -45,7 +45,7 @@ const ServicesSection = () => {
             >
               <div className="mb-4">{service.icon}</div>
               <h3 className="text-xl font-bold mb-3">{service.title}</h3>
-              <p className="text-gray-400">{service.description}</p>
+              <p className="text-muted-foreground">{service.description}</p>
             </div>
           ))}
         </div>
