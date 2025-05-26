@@ -33,7 +33,7 @@ const ServicesSection = () => {
   ];
 
   return (
-    <section id="services" className="py-24 bg-muted/20">
+    <section id="services" className="py-20 bg-muted/20">
       <div className="section-container">
         <h2 className="section-title">Services</h2>
         
@@ -41,11 +41,11 @@ const ServicesSection = () => {
           {services.map((service, index) => (
             <div 
               key={index} 
-              className="bg-card p-8 rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.04)] card-hover border border-gray-100/50"
+              className="bg-card p-8 rounded-xl shadow-md card-hover border"
             >
-              <div className="mb-6 p-3 bg-primary/5 rounded-xl w-fit">{service.icon}</div>
-              <h3 className="text-xl font-semibold mb-4 text-foreground">{service.title}</h3>
-              <p className="text-muted-foreground leading-relaxed font-normal">{service.description}</p>
+              <div className="mb-6">{service.icon}</div>
+              <h3 className="text-xl font-semibold mb-4">{service.title}</h3>
+              <p className="text-muted-foreground leading-relaxed">{service.description}</p>
             </div>
           ))}
         </div>
