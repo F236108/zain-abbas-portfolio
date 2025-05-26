@@ -7,45 +7,45 @@
 
 @layer base {
   :root {
-    /* Clean, minimal light mode inspired by reference image */
-    --background: 252 252 251;  /* Warm off-white like the reference */
-    --foreground: 23 23 23;     /* Deep charcoal for excellent readability */
+    /* Warm, soft light mode inspired by reference image */
+    --background: 242 240 239;  /* Soft off-white #F2F0EF */
+    --foreground: 41 37 36;     /* Warm dark brown for excellent readability */
 
-    --card: 255 255 255;        /* Pure white cards for contrast */
-    --card-foreground: 23 23 23;
+    --card: 255 255 255;        /* Pure white cards for gentle contrast */
+    --card-foreground: 41 37 36;
 
     --popover: 255 255 255;
-    --popover-foreground: 23 23 23;
+    --popover-foreground: 41 37 36;
 
-    --primary: 14 165 233;      /* Clean sky blue */
+    --primary: 99 102 241;      /* Soft indigo blue */
     --primary-foreground: 255 255 255;
 
     --secondary: 248 250 252;   /* Very light blue-gray */
-    --secondary-foreground: 51 65 85;
+    --secondary-foreground: 71 85 105;
 
-    --muted: 249 250 251;       /* Subtle warm gray */
-    --muted-foreground: 107 114 128;
+    --muted: 250 250 249;       /* Subtle warm gray */
+    --muted-foreground: 120 113 108;
 
-    --accent: 59 130 246;       /* Vibrant blue accent */
+    --accent: 139 92 246;       /* Soft purple accent */
     --accent-foreground: 255 255 255;
 
     --destructive: 239 68 68;
     --destructive-foreground: 255 255 255;
 
-    --border: 229 231 235;      /* Soft border color */
-    --input: 249 250 251;       /* Warm input background */
-    --ring: 14 165 233;         /* Focus ring matching primary */
+    --border: 231 229 228;      /* Warm border color */
+    --input: 255 255 255;       /* Clean white input background */
+    --ring: 99 102 241;         /* Focus ring matching primary */
 
     --radius: 0.75rem;
 
     --sidebar-background: 255 255 255;
-    --sidebar-foreground: 23 23 23;
-    --sidebar-primary: 14 165 233;
+    --sidebar-foreground: 41 37 36;
+    --sidebar-primary: 99 102 241;
     --sidebar-primary-foreground: 255 255 255;
     --sidebar-accent: 248 250 252;
-    --sidebar-accent-foreground: 51 65 85;
-    --sidebar-border: 229 231 235;
-    --sidebar-ring: 14 165 233;
+    --sidebar-accent-foreground: 71 85 105;
+    --sidebar-border: 231 229 228;
+    --sidebar-ring: 99 102 241;
   }
 
   .dark {
@@ -99,6 +99,8 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    font-weight: 400;
+    line-height: 1.6;
   }
   
   /* Enhanced smooth scrolling for 60fps */
@@ -118,13 +120,13 @@
   }
   
   ::-webkit-scrollbar-thumb {
-    background: rgba(14, 165, 233, 0.3);
+    background: rgba(99, 102, 241, 0.3);
     border-radius: 4px;
     transition: background 0.2s ease;
   }
   
   ::-webkit-scrollbar-thumb:hover {
-    background: rgba(14, 165, 233, 0.5);
+    background: rgba(99, 102, 241, 0.5);
   }
 
   /* Global 60fps optimizations */
@@ -153,12 +155,14 @@
 
 @layer components {
   .section-title {
-    @apply relative text-3xl md:text-4xl font-bold mb-6 inline-block will-change-transform;
+    @apply relative text-3xl md:text-4xl font-medium mb-8 inline-block will-change-transform;
+    font-weight: 500;
+    letter-spacing: -0.025em;
   }
   
   .section-title::after {
     content: "";
-    @apply absolute -bottom-2 left-0 w-1/2 h-1 bg-primary block;
+    @apply absolute -bottom-2 left-0 w-16 h-1 bg-primary block rounded-full;
     animation: fadeInScale 0.6s ease-out forwards;
   }
   
@@ -167,12 +171,12 @@
   }
   
   .card-hover {
-    @apply transition-all duration-200 ease-out hover:shadow-[0_4px_20px_rgba(0,0,0,0.08)] hover:translate-y-[-2px] will-change-transform;
+    @apply transition-all duration-300 ease-out hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] hover:translate-y-[-4px] will-change-transform;
     transform: translate3d(0, 0, 0);
   }
   
   .nav-link {
-    @apply relative px-4 py-2 text-foreground hover:text-primary transition-colors duration-150 ease-out will-change-transform;
+    @apply relative px-4 py-2 text-foreground/80 hover:text-primary transition-colors duration-200 ease-out will-change-transform font-medium;
   }
   
   .nav-link.active {
@@ -181,37 +185,37 @@
   
   .nav-link.active::after {
     content: "";
-    @apply absolute bottom-0 left-0 w-full h-0.5 bg-primary block;
+    @apply absolute bottom-0 left-0 w-full h-0.5 bg-primary block rounded-full;
     animation: slideInScale 0.3s ease-out forwards;
   }
   
   .highlight {
-    @apply text-primary;
+    @apply text-primary font-medium;
   }
   
   .btn-primary {
-    @apply bg-primary text-primary-foreground font-medium px-6 py-2 rounded transition-all duration-150 ease-out
-    hover:bg-opacity-90 hover:shadow-[0_4px_12px_rgba(14,165,233,0.25)] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50
+    @apply bg-primary text-primary-foreground font-medium px-8 py-3 rounded-xl transition-all duration-200 ease-out
+    hover:bg-primary/90 hover:shadow-[0_8px_25px_rgba(99,102,241,0.25)] focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2
     active:scale-98 will-change-transform;
     transform: translate3d(0, 0, 0);
+    font-weight: 500;
   }
   
   .btn-secondary {
-    @apply border border-primary text-primary font-medium px-6 py-2 rounded transition-all 
-    duration-150 ease-out hover:bg-primary hover:text-primary-foreground hover:shadow-[0_4px_12px_rgba(14,165,233,0.15)] focus:outline-none focus:ring-2 
-    focus:ring-primary focus:ring-opacity-50 active:scale-98 will-change-transform;
+    @apply border-2 border-primary/20 text-primary font-medium px-8 py-3 rounded-xl transition-all 
+    duration-200 ease-out hover:bg-primary hover:text-primary-foreground hover:shadow-[0_8px_25px_rgba(99,102,241,0.15)] hover:border-primary focus:outline-none focus:ring-2 
+    focus:ring-primary/50 focus:ring-offset-2 active:scale-98 will-change-transform;
     transform: translate3d(0, 0, 0);
+    font-weight: 500;
   }
   
   .section-container {
-    @apply max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8 will-change-transform;
+    @apply max-w-7xl mx-auto px-6 py-20 sm:px-8 lg:px-12 will-change-transform;
   }
-
-  /* ... keep existing code (scroll animations and other components) the same ... */
   
   /* Optimized scroll animations for 60fps */
   .scroll-animate {
-    @apply opacity-0 transition-all duration-400 ease-out will-change-transform;
+    @apply opacity-0 transition-all duration-500 ease-out will-change-transform;
     transform: translate3d(0, 0, 0);
   }
   
@@ -246,59 +250,15 @@
   
   /* Enhanced glass effect */
   .glass-card {
-    @apply backdrop-blur-lg bg-white/60 border border-gray-200/50 relative will-change-transform shadow-[0_8px_32px_rgba(0,0,0,0.06)];
+    @apply backdrop-blur-lg bg-white/80 border border-gray-200/30 relative will-change-transform shadow-[0_8px_32px_rgba(0,0,0,0.04)];
     transform: translate3d(0, 0, 0);
   }
   
   .glass-card::before {
     content: '';
-    @apply absolute inset-0 opacity-20 rounded-lg;
-    background: linear-gradient(to bottom right, rgba(14, 165, 233, 0.05), transparent);
+    @apply absolute inset-0 opacity-10 rounded-lg;
+    background: linear-gradient(to bottom right, rgba(99, 102, 241, 0.05), transparent);
     z-index: -1;
-  }
-  
-  /* Optimized animated border */
-  .animated-border {
-    @apply relative will-change-transform;
-  }
-  
-  .animated-border::after {
-    content: '';
-    @apply absolute -inset-0.5 bg-gradient-to-r from-primary via-accent to-primary rounded-lg opacity-0 transition-all duration-150 ease-out -z-10;
-  }
-  
-  .animated-border:hover::after {
-    @apply opacity-15 blur-sm;
-  }
-  
-  /* Optimized glow effect */
-  .glow-on-hover {
-    @apply relative overflow-hidden will-change-transform;
-  }
-  
-  .glow-on-hover::after {
-    content: '';
-    @apply absolute w-full h-full top-0 left-0 bg-gradient-to-r from-primary to-accent opacity-0 transition-opacity duration-150 ease-out;
-  }
-  
-  .glow-on-hover:hover::after {
-    @apply opacity-10 blur-xl;
-  }
-  
-  /* Optimized gradient hover */
-  .gradient-hover {
-    @apply relative transition-all duration-200 ease-out will-change-transform;
-    background: linear-gradient(to right, 
-      rgba(14, 165, 233, 0), 
-      rgba(59, 130, 246, 0), 
-      rgba(14, 165, 233, 0)
-    );
-    background-size: 200% 100%;
-    background-position: 0% 0%;
-  }
-  
-  .gradient-hover:hover {
-    background-position: 100% 0%;
   }
   
   /* Scale utilities for 60fps */
@@ -312,25 +272,19 @@
   
   /* Optimized float animation */
   .float-animation {
-    animation: float 3s ease-in-out infinite;
+    animation: float 4s ease-in-out infinite;
     will-change: transform;
     transform: translate3d(0, 0, 0);
   }
   
-  /* Optimized pulse glow */
-  .pulse-glow {
-    animation: pulse-glow 2s infinite ease-in-out;
-    will-change: box-shadow;
-  }
-
   /* Smooth hover transitions */
   .smooth-hover {
-    @apply transition-all duration-150 ease-out will-change-transform;
+    @apply transition-all duration-200 ease-out will-change-transform;
     transform: translate3d(0, 0, 0);
   }
 
   .smooth-hover:hover {
-    @apply translate-y-[-2px] shadow-[0_4px_20px_rgba(0,0,0,0.08)];
+    @apply translate-y-[-3px] shadow-[0_8px_30px_rgba(0,0,0,0.06)];
   }
 
   /* Optimized transitions */
@@ -343,8 +297,6 @@
   }
 }
 
-/* ... keep existing code (keyframes animations) the same ... */
-
 /* 60fps optimized keyframes */
 @keyframes float {
   0%, 100% { 
@@ -352,15 +304,6 @@
   }
   50% { 
     transform: translate3d(0, -12px, 0); 
-  }
-}
-
-@keyframes pulse-glow {
-  0%, 100% { 
-    box-shadow: 0 0 0 0 rgba(14, 165, 233, 0.3); 
-  }
-  50% { 
-    box-shadow: 0 0 0 8px rgba(14, 165, 233, 0); 
   }
 }
 

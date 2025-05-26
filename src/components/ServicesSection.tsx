@@ -13,39 +13,39 @@ const ServicesSection = () => {
     {
       title: "Technical Tutoring",
       description: "One-on-one and group tutoring in electrical engineering topics and C++ programming with customized lesson plans and exercises.",
-      icon: <BookOpen size={40} className="text-primary" />
+      icon: <BookOpen size={32} className="text-primary" />
     },
     {
       title: "Project Development Assistance",
       description: "Support in developing engineering projects involving circuit design and programming, from concept to implementation.",
-      icon: <Code size={40} className="text-accent" />
+      icon: <Code size={32} className="text-accent" />
     },
     {
       title: "Teacher Assistance",
       description: "Preparing materials, grading assignments, and engaging with students to enhance their learning experience.",
-      icon: <Briefcase size={40} className="text-primary" />
+      icon: <Briefcase size={32} className="text-primary" />
     },
     {
       title: "Basic Technical Consulting",
       description: "Troubleshooting and optimizing academic projects with practical solutions and performance improvements.",
-      icon: <Wrench size={40} className="text-accent" />
+      icon: <Wrench size={32} className="text-accent" />
     }
   ];
 
   return (
-    <section id="services" className="py-20 bg-muted/30">
+    <section id="services" className="py-24 bg-muted/20">
       <div className="section-container">
         <h2 className="section-title">Services</h2>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-16">
           {services.map((service, index) => (
             <div 
               key={index} 
-              className="bg-card p-6 rounded-lg shadow-[0_2px_16px_rgba(0,0,0,0.04)] card-hover border border-gray-100/50"
+              className="bg-card p-8 rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.04)] card-hover border border-gray-100/50"
             >
-              <div className="mb-4">{service.icon}</div>
-              <h3 className="text-xl font-semibold mb-3 text-foreground">{service.title}</h3>
-              <p className="text-muted-foreground leading-relaxed">{service.description}</p>
+              <div className="mb-6 p-3 bg-primary/5 rounded-xl w-fit">{service.icon}</div>
+              <h3 className="text-xl font-semibold mb-4 text-foreground">{service.title}</h3>
+              <p className="text-muted-foreground leading-relaxed font-normal">{service.description}</p>
             </div>
           ))}
         </div>
