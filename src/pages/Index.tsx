@@ -1,7 +1,7 @@
 
 import React, { useEffect } from 'react';
 import Navbar from '../components/Navbar';
-import HeroSection from '../components/hero'; // Updated import path
+import HeroSection from '../components/hero';
 import AboutSection from '../components/AboutSection';
 import PortfolioSection from '../components/PortfolioSection';
 import ServicesSection from '../components/ServicesSection';
@@ -14,6 +14,16 @@ const Index = () => {
   useEffect(() => {
     // Update document title
     document.title = "Zain Abbas | Electrical Engineering Portfolio";
+    
+    // Add page enter animation
+    document.body.classList.add('page-enter');
+    
+    // Cleanup animation class after animation completes
+    const timer = setTimeout(() => {
+      document.body.classList.remove('page-enter');
+    }, 800);
+
+    return () => clearTimeout(timer);
   }, []);
 
   return (

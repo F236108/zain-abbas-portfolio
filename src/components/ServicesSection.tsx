@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { BookOpen, Code, Briefcase, Wrench } from 'lucide-react';
 
 interface Service {
@@ -9,6 +9,8 @@ interface Service {
 }
 
 const ServicesSection = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+
   const services: Service[] = [
     {
       title: "Technical Tutoring",
@@ -32,20 +34,47 @@ const ServicesSection = () => {
     }
   ];
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    const cards = sectionRef.current?.querySelectorAll('.service-card');
+    cards?.forEach((card) => observer.observe(card));
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section id="services" className="py-20 bg-muted/20">
+    <section ref={sectionRef} id="services" className="py-24 bg-muted/30">
       <div className="section-container">
-        <h2 className="section-title">Services</h2>
+        <h2 className="section-title fade-in-up">Services</h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-16">
           {services.map((service, index) => (
             <div 
               key={index} 
-              className="bg-card p-8 rounded-xl shadow-md card-hover border"
+              className={`service-card reveal modern-card p-8 hover-glow group ${
+                index % 2 === 0 ? 'fade-in-left' : 'fade-in-right'
+              }`}
+              style={{ animationDelay: `${index * 0.2}s` }}
             >
-              <div className="mb-6">{service.icon}</div>
-              <h3 className="text-xl font-semibold mb-4">{service.title}</h3>
-              <p className="text-muted-foreground leading-relaxed">{service.description}</p>
+              <div className="mb-6 transform transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
+                {service.icon}
+              </div>
+              <h3 className="text-xl font-semibold mb-4 font-manrope group-hover:text-primary transition-colors duration-300">
+                {service.title}
+              </h3>
+              <p className="text-muted-foreground leading-relaxed transition-colors duration-300 group-hover:text-foreground/80">
+                {service.description}
+              </p>
             </div>
           ))}
         </div>
